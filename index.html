@@ -16,7 +16,7 @@
             const data = await res.json();
             document.getElementById("reseau").innerText = data.reseau || "—";
             document.getElementById("mdp").innerText = data.mot_de_passe || "—";
-            document.getElementById("date").innerText = new Date(data.created_at).toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+            document.getElementById("date").innerText = new Date(new Date(data.created_at).getTime() + 2 * 60 * 60 * 1000).toLocaleString("fr-FR");
         }
 
         fetchResult();
