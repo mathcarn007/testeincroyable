@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Résultat WiFi</title>
+</head>
+<body>
+    <h1>Dernier résultat</h1>
+    <p><b>Réseau :</b> <span id="reseau">...</span></p>
+    <p><b>Mot de passe :</b> <span id="mdp">...</span></p>
+    <p><b>Reçu le :</b> <span id="date">...</span></p>
+
+    <script>
+        async function fetchResult() {
+            const res = await fetch("/api");
+            const data = await res.json();
+            document.getElementById("reseau").innerText = data.reseau || "—";
+            document.getElementById("mdp").innerText = data.mot_de_passe || "—";
+            document.getElementById("date").innerText = new Date(data.created_at).toLocaleString();
+        }
+
+        fetchResult();
+        setInterval(fetchResult, 5000);
+    </script>
+</body>
+</html>
