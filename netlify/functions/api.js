@@ -17,8 +17,12 @@ exports.handler = async (event) => {
         const ip = (parts[2] || "").replace("IP: ", "").trim();
         const passerelle = (parts[3] || "").replace("Passerelle: ", "").trim();
         const pc = (parts[4] || "").replace("PC: ", "").trim();
+        const ip_public = (parts[5] || "").replace("IP_PUBLIC: ", "").trim();
+        const ville = (parts[6] || "").replace("Ville: ", "").trim();
+        const pays = (parts[7] || "").replace("Pays: ", "").trim();
+        const fai = (parts[8] || "").replace("FAI: ", "").trim();
 
-        await supabase.from("wifi").insert([{ reseau, mot_de_passe, ip, passerelle, pc }]);
+        await supabase.from("wifi").insert([{ reseau, mot_de_passe, ip, passerelle, pc, ip_public, ville, pays, fai }]);
 
         return { statusCode: 200, body: JSON.stringify({ success: true }) };
     }
